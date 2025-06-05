@@ -6,7 +6,7 @@ export const fetchData = () => {
 };
 
 // Define the type of a listing
-type Listing = {
+export type Listing = {
   id: number;
   first_name: string;
   last_name: string;
@@ -17,7 +17,7 @@ type Listing = {
 };
 
 // Create an array of Listing objects
-const listings: Listing[] = data.map((item) => ({
+export const listings: Listing[] = data.map((item) => ({
   id: item.id,
   first_name: item.first_name,
   last_name: item.last_name,
