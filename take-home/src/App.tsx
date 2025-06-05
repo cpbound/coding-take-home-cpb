@@ -1,8 +1,6 @@
-import { fetchData } from './middleware/middleware.ts'
+import { fetchData, listingsByColorOrLanguage, listingsByCountry, listingsWithNullValue } from './middleware/middleware.ts'
 
 function App() {
-
-  fetchData();
 
   return (
     <>
