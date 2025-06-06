@@ -8,20 +8,41 @@ import {
 import type { Listing } from './middleware/middleware.ts'
 
 const App = () => {
-  const [allListings, setAllListings] = useState<Listing[]>([])
   const [search, setSearch] = useState('')
-  const [searchResults, setSearchResults] = useState<Listing[] | null>(null)
+  const [groupedView, setGroupedView] = useState(false);
+  const [groupedListings, setGroupedListings] = useState<Record<string, Listing[]>>({});
+  const [displayedListings, setDisplayedListings] = useState<Listing[]>([]);
+
 
   useEffect(() => {
-    setAllListings(listings)
+    setDisplayedListings(listings)
   }, [])
 
   const handleSearch = () => {
-    const filtered = listingsByColorOrLanguage(search);
-    setSearchResults(filtered);
+    const filtered = listingsByColorOrLanguage(search.trim());
+    setDisplayedListings(filtered);
+
+    if (groupedView) {
+      setGroupedListings(listingsByCountry(filtered));
+    }
   };
 
-  const displayedListings = searchResults || allListings;
+  const handleReset = () => {
+    setSearch('');
+    setDisplayedListings(listings);
+
+    if (groupedView) {
+      setGroupedListings(listingsByCountry(listings));
+    }
+  };
+
+  const toggleGroupedView = () => {
+    if (!groupedView) {
+      const grouped = listingsByCountry(displayedListings);
+      setGroupedListings(grouped);
+    }
+    setGroupedView(!groupedView);
+  };
 
   return (
     <div>
@@ -36,10 +57,12 @@ const App = () => {
           onChange={(e) => setSearch(e.target.value)}
         />
         <button onClick={handleSearch}>Search</button>
-        {searchResults && (
-          <button onClick={() => (setSearchResults(null), setSearch(''))}>Reset</button>
-        )}
+        {search && <button onClick={handleReset}>Reset</button>}
       </div>
+
+      <button onClick={toggleGroupedView}>
+        {groupedView ? "Show Flat List" : "Group by Country"}
+      </button>
 
       <div className="listings">
         <h2>All Listings</h2>
@@ -54,18 +77,38 @@ const App = () => {
               <th>Country</th>
             </tr>
           </thead>
-          <tbody>
-            {displayedListings.map((listing) => (
-              <tr key={listing.id}>
-                <td>{listing.last_name}</td>
-                <td>{listing.first_name}</td>
-                <td>{listing.email}</td>
-                <td>{listing.color || 'N/A'}</td>
-                <td>{listing.language || 'N/A'}</td>
-                <td>{listing.country || 'N/A'}</td>
-              </tr>
-            ))}
-          </tbody>
+          {groupedView ? (
+            Object.entries(groupedListings).map(([country, group]) => (
+              <tbody key={country}>
+                <tr>
+                  <td colSpan={6}><strong>{country}</strong></td>
+                </tr>
+                {group.map((listing) => (
+                  <tr key={listing.id}>
+                    <td>{listing.first_name}</td>
+                    <td>{listing.last_name}</td>
+                    <td>{listing.email}</td>
+                    <td>{listing.color || 'N/A'}</td>
+                    <td>{listing.language || 'N/A'}</td>
+                    <td>{listing.country || 'N/A'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            ))
+          ) : (
+            <tbody>
+              {displayedListings.map((listing) => (
+                <tr key={listing.id}>
+                  <td>{listing.first_name}</td>
+                  <td>{listing.last_name}</td>
+                  <td>{listing.email}</td>
+                  <td>{listing.color || 'N/A'}</td>
+                  <td>{listing.language || 'N/A'}</td>
+                  <td>{listing.country || 'N/A'}</td>
+                </tr>
+              ))}
+            </tbody>
+          )}
         </table>
       </div>
     </div>

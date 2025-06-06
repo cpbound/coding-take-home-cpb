@@ -38,8 +38,8 @@ export const listingsByColorOrLanguage = (value: string): Listing[] => {
 };
 
 // 2. An array of listings of all countries represented in the database
-export const listingsByCountry = (): Record<string, Listing[]> => {
-  return listings.reduce((acc: Record<string, Listing[]>, listing: Listing) => {
+export const listingsByCountry = (listingsArray: Listing[]): Record<string, Listing[]> => {
+  return listingsArray.reduce((acc: Record<string, Listing[]>, listing: Listing) => {
     const country = listing.country ?? "Unknown";
     if (!acc[country]) {
       acc[country] = [];
