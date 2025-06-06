@@ -12,7 +12,8 @@ const App = () => {
   const [groupedView, setGroupedView] = useState(false);
   const [groupedListings, setGroupedListings] = useState<Record<string, Listing[]>>({});
   const [displayedListings, setDisplayedListings] = useState<Listing[]>([]);
-
+  const [nullField, setNullField] = useState<'color' | 'language'>('color');
+  const [nullCount, setNullCount] = useState<number | null>(null);
 
   useEffect(() => {
     setDisplayedListings(listings)
@@ -61,8 +62,36 @@ const App = () => {
       </div>
 
       <button onClick={toggleGroupedView}>
-        {groupedView ? "Show Flat List" : "Group by Country"}
+        {groupedView ? "Show All" : "Group by Country"}
       </button>
+
+      <div className="null-check">
+        <h2>Check for Missing Values</h2>
+        <label>
+          Field:
+          <select
+            value={nullField}
+            onChange={(e) => setNullField(e.target.value as 'color' | 'language')}
+          >
+            <option value="color">Color</option>
+            <option value="language">Language</option>
+          </select>
+        </label>
+        <button
+          onClick={() => {
+            const missing = listingsWithNullValue(nullField, displayedListings);
+            console.log(missing);
+            setNullCount(missing.length);
+          }}
+        >
+          Count Missing {nullField}
+        </button>
+
+        {nullCount !== null && (
+          <p>{nullCount} listing(s) are missing a value for <strong>{nullField}</strong>.</p>
+        )}
+      </div>
+
 
       <div className="listings">
         <h2>All Listings</h2>

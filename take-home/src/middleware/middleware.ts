@@ -51,7 +51,8 @@ export const listingsByCountry = (listingsArray: Listing[]): Record<string, List
 
 // 3. Return an array of all listings which have a null value of a particular key like colour or language.
 export const listingsWithNullValue = (
-  field: "color" | "language" | "country"
+  field: "color" | "language" | "country",
+  dataset: Listing[] = listings
 ): Listing[] => {
-  return listings.filter((listing: Listing) => listing[field] === null);
+  return dataset.filter((listing: Listing) => listing[field] === null);
 };
