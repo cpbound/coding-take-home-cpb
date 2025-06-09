@@ -1,38 +1,49 @@
-# coding-take-home
+# Actual Listings App
 
-## Overview
+A React + TypeScript web application for displaying and filtering user listings by color, language, and country. This project was developed as a take-home assignment for Actual.
 
-This is a relatively simple take home test for us to assess your general knowledge of setting up a basic app.
+## Features
 
-We are looking for an overall understanding of React, Typescript, and general app design.
+- Search listings by color or language
+- Toggle grouped view by country
+- Filter listings with missing (null) values in color, language, or country
+- Responsive and accessible UI with loading states
+- Type-safe with TypeScript
 
-The instructions on how to run the application locally is in the README file in the take-home folder.
+## Screenshots
 
-You are free to add a better file structure, but this task should really only need edits to the files App.tsx, and middleware.ts.
-
-To complete this challenge, please fork this repository and build your own code, then share a link to your version of the repository with some screenshots of the app working locally.
-
-## Task
-
-### Part One
-
-In the mock-data folder, there is a json which is meant to represent an API call from the backend. You are to build a middleware to fetch this data, and conduct some light processing for the front end. 
-
-This should minimally include three key fetch calls
-
-1) Return an array of listings of a particular color or language
-
-2) Return an array of listings of all countries represented in the database
-
-3) Return an array of all listings which have a null value of a particular key like color or language.
+![Screen1](/take-home/public/col-test.png)
+![Screen1](/take-home/public/lang-test.png)
+![Screen1](/take-home/public/col-void.png)
+![Screen1](/take-home/public/order-test.png)
+![Screen1](/take-home/public/order-test2.png)
+![Screen1](/take-home/public/null-val1.png)
+![Screen1](/take-home/public/null-val2.png)
 
 
-### Part Two
+## Tech Stack
 
-Once you have all your fetch calls, you will build a single page application to show the results of these fetch calls in a way that makes the most sense to you. This is a test of not only your understanding of front end development, but a general understanding of UI and UX. We are looking for an app that someone could jump in cold and immediately understand how to use.
+- React + TypeScript
+- Tailwind CSS for styling
+- Functional components with hooks
+- Modular middleware for data processing
 
-This UI should minimally include but is not limited to the following basic features.
+## Setup
 
-- The ability to search and display all listings of a particular color or language.
-- A way to visualize each listing grouped by country.
-- A way to display the number of listings which does not have data on the searched category.
+1. Clone the repo
+2. Run `npm install` or `yarn`
+3. Start the app with `npm start` or `yarn dev`
+4. Visit `http://localhost:5173` in your browser
+
+## Project Structure
+
+- `src/middleware` — Data and business logic
+- `src/components` — UI components
+- `src/mock-data` — Sample JSON data
+- `src/App.tsx` — Main application component
+
+## Notes
+
+- Mock data is used for demonstration purposes
+- Search is case-insensitive and supports exact matches for color or language
+- Grouping is by country with fallback for unknown values
