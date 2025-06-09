@@ -163,6 +163,22 @@
     "@babel/helper-string-parser" "^7.27.1"
     "@babel/helper-validator-identifier" "^7.27.1"
 
+"@emnapi/core@^1.4.3":
+  version "1.4.3"
+  dependencies:
+    "@emnapi/wasi-threads" "1.0.2"
+    tslib "^2.4.0"
+
+"@emnapi/runtime@^1.4.3":
+  version "1.4.3"
+  dependencies:
+    tslib "^2.4.0"
+
+"@emnapi/wasi-threads@^1.0.2", "@emnapi/wasi-threads@1.0.2":
+  version "1.0.2"
+  dependencies:
+    tslib "^2.4.0"
+
 "@esbuild/linux-x64@0.25.5":
   version "0.25.5"
   resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.25.5.tgz"
@@ -300,6 +316,13 @@
   dependencies:
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
+
+"@napi-rs/wasm-runtime@^0.2.10":
+  version "0.2.10"
+  dependencies:
+    "@emnapi/core" "^1.4.3"
+    "@emnapi/runtime" "^1.4.3"
+    "@tybys/wasm-util" "^0.9.0"
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -446,6 +469,11 @@
     "@tailwindcss/node" "4.1.8"
     "@tailwindcss/oxide" "4.1.8"
     tailwindcss "4.1.8"
+
+"@tybys/wasm-util@^0.9.0":
+  version "0.9.0"
+  dependencies:
+    tslib "^2.4.0"
 
 "@types/babel__core@^7.20.5":
   version "7.20.5"
@@ -1524,6 +1552,9 @@ ts-api-utils@^2.1.0:
   version "2.1.0"
   resolved "https://registry.npmjs.org/ts-api-utils/-/ts-api-utils-2.1.0.tgz"
   integrity sha512-CUgTZL1irw8u29bzrOD/nH85jqyc74D6SshFgujOIA7osm2Rz7dYH77agkx7H4FBNxDq7Cjf+IjaX/8zwFW+ZQ==
+
+tslib@^2.4.0, tslib@^2.8.0:
+  version "2.8.0"
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

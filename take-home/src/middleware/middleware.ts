@@ -38,15 +38,20 @@ export const listingsByColorOrLanguage = (value: string): Listing[] => {
 };
 
 // 2. An array of listings of all countries represented in the database
-export const listingsByCountry = (listingsArray: Listing[]): Record<string, Listing[]> => {
-  return listingsArray.reduce((acc: Record<string, Listing[]>, listing: Listing) => {
-    const country = listing.country ?? "Unknown";
-    if (!acc[country]) {
-      acc[country] = [];
-    }
-    acc[country].push(listing);
-    return acc;
-  }, {});
+export const listingsByCountry = (
+  listingsArray: Listing[]
+): Record<string, Listing[]> => {
+  return listingsArray.reduce(
+    (acc: Record<string, Listing[]>, listing: Listing) => {
+      const country = listing.country ?? "Unknown Country";
+      if (!acc[country]) {
+        acc[country] = [];
+      }
+      acc[country].push(listing);
+      return acc;
+    },
+    {}
+  );
 };
 
 // 3. Return an array of all listings which have a null value of a particular key like colour or language.
