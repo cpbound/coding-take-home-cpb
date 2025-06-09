@@ -12,6 +12,7 @@ import Search from './components/Search.tsx'
 import GroupToggle from './components/GroupToggle.tsx'
 import NullCheck from './components/NullCheck.tsx'
 import ListingsTable from './components/ListingsTable.tsx'
+import Footer from './components/Footer.tsx'
 
 const App = () => {
   const [search, setSearch] = useState('')
@@ -53,7 +54,6 @@ const App = () => {
       if (groupedView) {
         setGroupedListings(listingsByCountry(filtered));
       }
-
       setLoading(false);
     });
   };
@@ -67,7 +67,6 @@ const App = () => {
       if (groupedView) {
         setGroupedListings(listingsByCountry(listings));
       }
-
       setLoading(false);
     });
   };
@@ -106,6 +105,7 @@ const App = () => {
           displayedListings={displayedListings}
         />
       )}
+      <Footer />
     </div>
   )
 };

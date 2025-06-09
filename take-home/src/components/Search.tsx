@@ -13,15 +13,23 @@ const Search: React.FC<Props> = ({
   handleSearch,
   handleReset,
 }) => {
+
+  const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <section className="mb-8 p-4 bg-white rounded-xl shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Search by Colour or Language</h2>
+      <h2 className="text-xl font-semibold mb-4">Search by Color or Language</h2>
       <div className="flex flex-wrap gap-4 items-center">
         <input
           type="text"
           placeholder="e.g. English or Blue"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          onKeyDown={onKeyDown}
           className="flex-grow border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
         />
         <button
